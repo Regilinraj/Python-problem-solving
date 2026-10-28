@@ -11,7 +11,7 @@ print("Department:CSE")
 print("*"*5)
 print("*"*5)
 print("*"*5)
-print("*"*5)
+
 
 #Using sep, print 2026-10-28 from print("2026", "10", "28").
 print("2026","10","28",sep="-")
@@ -29,11 +29,11 @@ print(5,end=" ")
 #        Mani	92
 print()
 print("Name\tMarks")
-print("Ravi\t",80)
-print("Mani\t",92)
+print("Ravi\t80")
+print("Mani\t92")
 
 #A6. Print: She said "Python is easy" (with the quotes appearing in the output).
-print("\"Python is easy\"")
+print("She said \"Python is easy\"")
 
 #Store your name, age, and city in variables and print one sentence using an f-string.
 name="Regilin"
@@ -45,7 +45,7 @@ print(f"{name} is {age} years old living in {city}")
 a=10
 b=20
 a,b=b,a
-print(a,b)
+print(f"a={a}, b={b}")
 
 #Print the type of each: 42, 4.2, "42", True, "True". Write down your prediction first.
 print(type(42))    #int
@@ -65,7 +65,7 @@ print(bool(0))    #False
 print(bool(1))    #True
 print(bool(""))   #False
 print(bool(" "))  #True  space also consider as non empty so true
-print(bool("False"))    #True because no empty string is True
+print(bool("False"))    #True because non empty string is True
 
 #Given a = 17, b = 5, print a + b, a - b, a * b, a / b, a // b, a % b, a ** b.
 a=17
@@ -146,8 +146,8 @@ print(f"division: {num1/num2:.2f}")
 #Ask for the radius and print the area of the circle using 3.14159 * r * r, with 2 decimals. For r=5 the answer is 78.54.
 r=int(input("Enter radius: "))
 pi=3.14159
-radius=pi*r*r
-print(f"radius {radius:.2f}")
+area=pi*r*r
+print(f"radius {area:.2f}")
 
 #Ask for a name and print its length and its uppercase form.
 name=input("Enter your name: ")
@@ -161,7 +161,7 @@ sub3=int(input("Enter sub3 mark: "))
 total=sub1+sub2+sub3
 average=total/3
 print("total: ",total)
-print(f"average: ,{average:.2f}")
+print(f"average: {average:.2f}")
 
 #Read two numbers on one line (5 3) using map(int, input().split()) and print the larger one without using an if (hint: use max()).
 a,b=map(int,input("Enter numbers: ").split())
@@ -276,5 +276,118 @@ if letter in "aeiou":
     print("vowel")
 else:
     print("Consonent")
+
+#Character type. Read one character and print whether it is a digit, a letter, or something else (special character).
+#Test: 7 Digit, k Letter, # Special.
+#Hint: ch.isdigit() and ch.isalpha().
+
+value=input("Enter a value: ")
+if value.isdigit():
+    print("digit")
+elif value.isalpha():
+    print("letter")
+else:
+    print("special")
+
+#Day of the week. Read a number 1 to 7 and print Monday to Sunday. Otherwise print Invalid day.
+number=int(input("Enter number from 1 to 7: "))
+if number==1:
+    print("Sunday")
+elif number==2:
+    print("Monday")
+elif number==3:
+    print("Tuesday")
+elif number==4:
+    print("Wednesday")
+elif number==5:
+    print("Thursday")
+elif number==6:
+    print("Friday")
+elif number==7:
+    print("Saturday")
+else:
+    print("Invalid")
+
+#Electricity bill:
+
+#Up to 100 units: free
+#101 to 200 units: Rs 2 per unit above 100
+#Above 200 units: Rs 3 per unit above 200, plus the Rs 2 charge for the 101 to 200 slab
+
+#Test: 80 Rs 0, 150 Rs 100, 250 Rs 350.
+
+unit=int(input("Enter electricity unit: "))
+if unit<=100:
+    amount=0
+elif unit<=200:
+    amount=(unit-100)*2
+else:
+    amount=(100*2)+(unit-200)*3
+print("Units ",unit)
+print("Bill: ",amount) 
+
+#Triangle type. Read three sides:
+
+#Not a triangle if the sum of any two sides is not greater than the third
+#Otherwise: Equilateral, Isosceles, or Scalene
+
+#Test: 3 3 3, 3 3 5, 3 4 5, 1 2 5.
+a=int(input("Enter side1: "))
+b=int(input("Enter side2: "))
+c=int(input("Enter side3: "))
+if a+b<=c or b+c<=a or c+a<=b:
+    print("Not a valid triangle")
+elif a==b and b==c:
+    print("Equilateral triangle")
+elif a==b or b==c or c==a:
+    print("Isosceles triangle")
+else:
+    print("Scalene triangle")
+
+#Simple calculator. Read two numbers and an operator (+, -, *, /). Handle division by zero and invalid operators.
+num1=float(input("Enter number 1: "))
+num2=float(input("Enter number 2: "))
+operator=input("Enter the operator(+,-,*,/): ")
+if operator=="+":
+    print("Result: ",num1+num2)
+elif operator=="-":
+    print("Result: ",num1-num2)
+elif operator=="*":
+    print("Result: ",num1*num2)
+elif operator=="/":
+    if num2==0:
+        print("Division by zero is not possible")
+    else:
+        print("Result: ",num1/num2)
+else:
+    print("Invalid operator")
+
+#Check whether three numbers are in ascending order (a ≤ b ≤ c). Print Sorted or Not sorted. Try it with a chained comparison.
+a=5
+b=6
+c=7
+if a<=b<=c:
+    print("Sorted")
+else:
+    print("not sorted")
+
+#ATM logic. Balance is 5000. Read a withdrawal amount.
+
+#If the amount is not a multiple of 100, print Enter a multiple of 100
+#Else if the amount is more than the balance, print Insufficient balance
+#Else print Collect cash and the remaining balance
+
+#Test: 250, 6000, 1500.
+balance=5000
+amount=int(input("Enter amount to withdraw: "))
+if amount%100!=0:
+    print("Enter a multiple of 100")
+elif amount>balance:
+    print("Insufficient balance")
+else:
+    remaining_bal=balance-amount
+    print("collect cash")
+    print("Remaining balance: ",remaining_bal)
+
 
 
